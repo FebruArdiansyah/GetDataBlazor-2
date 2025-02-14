@@ -1,0 +1,62 @@
+﻿@page "/comment"
+@using GetDataBlazor.Data
+@using GetDataBlazor.Services
+@inject CommentService CommentService
+
+<h3>Comment</h3>
+
+<input @bind="SearchText" placeholder="Search comments..." class="form-control mb-2" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (IsLoading)
+        {
+            <tr>
+                <td colspan="4">Loading comments...</td>
+            </tr>
+        }
+        else if (FilteredComments.Any())
+        {
+            @foreach (var comment in FilteredComments)
+            {
+                <tr>
+                    <td>@comment.Id</td>
+                    <td>@comment.Name</td>
+                    <td>@comment.Email</td>
+                    <td>@comment.Body</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No comments found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Comment> Comments = new();
+    private string SearchText = "";
+    private bool IsLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Comments = await CommentService.GetCommentsAsync();
+        IsLoading = false;
+    }
+
+    private IEnumerable<Comment> FilteredComments =>
+        string.IsNullOrWhiteSpace(SearchText)
+        ? Comments
+        : Comments.Where(c => c.Body.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+}

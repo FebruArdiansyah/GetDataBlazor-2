@@ -1,0 +1,37 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">GetDataBlazor</a>
+    </div>
+</div>
+
+<input type="checkbox" id="nav-toggle" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.getElementById('nav-toggle').click()">
+    <nav class="flex-column">
+        <ul class="nav flex-column">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    <span class="bi bi-house-door-fill" aria-hidden="true"></span> Home
+                </NavLink>
+            </li>
+
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="counter">
+                    <span class="bi bi-plus-square-fill" aria-hidden="true"></span> Counter
+                </NavLink>
+            </li>
+
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="weather">
+                    <span class="bi bi-list-nested" aria-hidden="true"></span> Weather
+                </NavLink>
+            </li>
+
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="comment">
+                    <span class="bi bi-chat-left-text" aria-hidden="true"></span> Comments
+                </NavLink>
+            </li>
+        </ul>
+    </nav>
+</div>
